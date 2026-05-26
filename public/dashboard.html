@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Panel de administración - Gestión de Conocimiento">
+  <title>Dashboard - Gestión de Conocimiento</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="bg-animation">
+    <div class="orb"></div><div class="orb"></div><div class="orb"></div>
+  </div>
+
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="icon">🧠</div>
+        <h2>GC Panel</h2>
+      </div>
+      <nav>
+        <a href="#" class="active" data-section="dashboard" onclick="showSection('dashboard', this)">
+          <span class="nav-icon">📊</span> Dashboard
+        </a>
+        <a href="#" data-section="users" onclick="showSection('users', this)">
+          <span class="nav-icon">👥</span> Usuarios
+        </a>
+        <a href="#" data-section="profile" onclick="showSection('profile', this)">
+          <span class="nav-icon">⚙️</span> Mi Perfil
+        </a>
+      </nav>
+      <div class="user-card">
+        <div class="user-info">
+          <div class="avatar" id="user-avatar">A</div>
+          <div>
+            <div class="name" id="user-name">Cargando...</div>
+            <div class="role" id="user-role">-</div>
+          </div>
+        </div>
+        <button class="btn-logout" onclick="logout()">🚪 Cerrar Sesión</button>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main-content">
+      <!-- Dashboard Section -->
+      <section id="section-dashboard">
+        <div class="page-header">
+          <h1>Dashboard</h1>
+          <p>Bienvenido al panel de gestión</p>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon purple">👥</div>
+            <div class="stat-value" id="stat-total">0</div>
+            <div class="stat-label">Total Usuarios</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon green">✅</div>
+            <div class="stat-value" id="stat-active">0</div>
+            <div class="stat-label">Activos</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon orange">🛡️</div>
+            <div class="stat-value" id="stat-admins">0</div>
+            <div class="stat-label">Administradores</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Users Section -->
+      <section id="section-users" style="display:none">
+        <div class="page-header">
+          <h1>Gestión de Usuarios</h1>
+          <p>Administra los usuarios del sistema</p>
+        </div>
+        <div class="table-container">
+          <div class="table-header">
+            <h2>Listado de Usuarios</h2>
+            <button class="btn-add" onclick="openAddModal()">+ Nuevo Usuario</button>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th>Estado</th>
+                <th>Creado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="users-tbody">
+              <tr><td colspan="6" style="text-align:center; padding:40px; color:var(--text-muted)">Cargando...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Profile Section -->
+      <section id="section-profile" style="display:none">
+        <div class="page-header">
+          <h1>Mi Perfil</h1>
+          <p>Actualiza tu información personal</p>
+        </div>
+        <div class="table-container" style="max-width:500px">
+          <div style="padding:24px">
+            <div class="form-group">
+              <label for="profile-name">Nombre</label>
+              <input type="text" id="profile-name">
+            </div>
+            <div class="form-group">
+              <label for="profile-email">Email</label>
+              <input type="email" id="profile-email">
+            </div>
+            <button class="btn-primary" onclick="updateProfile()" style="margin-top:8px">Guardar Cambios</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modal-title">Nuevo Usuario</h3>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="modal-name">Nombre</label>
+          <input type="text" id="modal-name" placeholder="Nombre completo">
+        </div>
+        <div class="form-group">
+          <label for="modal-email">Email</label>
+          <input type="email" id="modal-email" placeholder="correo@ejemplo.com">
+        </div>
+        <div class="form-group" id="modal-password-group">
+          <label for="modal-password">Contraseña</label>
+          <input type="password" id="modal-password" placeholder="Mínimo 6 caracteres">
+        </div>
+        <div class="form-group">
+          <label for="modal-rol">Rol</label>
+          <select id="modal-rol" style="width:100%;padding:12px 16px;background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--radius-sm);color:var(--text-primary);font-family:inherit;font-size:14px">
+            <option value="usuario">Usuario</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
+        <button class="btn-save" id="modal-save" onclick="saveUser()">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>

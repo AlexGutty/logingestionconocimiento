@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sistema de gestión de conocimiento - Inicia sesión o regístrate">
+  <title>Login - Gestión de Conocimiento</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="bg-animation">
+    <div class="orb"></div>
+    <div class="orb"></div>
+    <div class="orb"></div>
+  </div>
+
+  <div class="login-container">
+    <div class="login-card">
+      <div class="logo">
+        <div class="icon">🧠</div>
+        <h1>Gestión de Conocimiento</h1>
+        <p>Accede a tu cuenta para continuar</p>
+      </div>
+
+      <div class="auth-tabs">
+        <button id="tab-login" class="active" onclick="switchTab('login')">Iniciar Sesión</button>
+        <button id="tab-register" onclick="switchTab('register')">Registrarse</button>
+      </div>
+
+      <div id="alert-box" class="alert"></div>
+
+      <!-- Login Form -->
+      <form id="login-form" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label for="login-email">Correo electrónico</label>
+          <input type="email" id="login-email" placeholder="tu@correo.com" required>
+        </div>
+        <div class="form-group">
+          <label for="login-password">Contraseña</label>
+          <input type="password" id="login-password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn-primary" id="btn-login">Iniciar Sesión</button>
+      </form>
+
+      <!-- Register Form -->
+      <form id="register-form" style="display:none" onsubmit="handleRegister(event)">
+        <div class="form-group">
+          <label for="reg-name">Nombre completo</label>
+          <input type="text" id="reg-name" placeholder="Tu nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="reg-email">Correo electrónico</label>
+          <input type="email" id="reg-email" placeholder="tu@correo.com" required>
+        </div>
+        <div class="form-group">
+          <label for="reg-password">Contraseña</label>
+          <input type="password" id="reg-password" placeholder="Mínimo 6 caracteres" minlength="6" required>
+        </div>
+        <button type="submit" class="btn-primary" id="btn-register">Crear Cuenta</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/login.js"></script>
+</body>
+</html>
